@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Todo List Website</title>
+        <link type="text/css" rel="stylesheet" href="todo.css" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    </head>
+    <body>
+        <h1>Todos()</h1> 
+        <div id = "header">
+           <form id="textarea">
+            <input id="text" type = "textarea"  placeholder="Enter your todo here">
+            <button id="btn" type="button">Submit</button>
+           </form>
+        </div>
+        <div id= "main">
+            <ul id="task"></ul>
+        </div>
+        <script src="todo.js"></script>
+    </body>
+</html>
+
+<!-- to remove the input text once user submit (input id="text" type = "textarea" onfocus="this.value=' '"  placeholder="Enter your todo here" ) instead of this we enter this line in js
+document.getElementById("text").value=""; -->
