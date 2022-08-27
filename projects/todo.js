@@ -5,31 +5,36 @@ function buttonClick() {
     document.getElementById("text").value="";
     //creating elements//
     let textLabel = document.createElement("label");
+    textLabel.classList.add("taskLabel");
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     //append child method allows you to add node to the end of the list of child nodes of a specified parent node//
     listItemElement.appendChild(checkbox);
     // checkbox.style.margin= "5px";
-    checkbox.style.float= "Left";
+    
     textLabel.innerHTML = todoItemText;
     listItemElement.appendChild(textLabel);
+    
     let editBtnRefElement = document.createElement("button");
     editBtnRefElement.innerHTML = "edit";
     listItemElement.appendChild(editBtnRefElement);
-    // editBtnRefElement.style.margin = "0px 10px 0px 10px";
+    // editBtnRefElement.style.float = "right";
     let doneBtnElement = document.createElement("button");
     doneBtnElement.innerHTML = "Done";
     listItemElement.appendChild(doneBtnElement);
-    // editBtnRefElement.style.margin = "0px 10px 0px 10px";
-    // doneBtnElement.style.display = "none";
+    
+    // editBtnRefElement.style.float = "right";
+    // doneBtnElement.style.float = "right";
     let dltBtnRefElement = document.createElement("button");
     dltBtnRefElement.innerHTML = "delete";
     listItemElement.appendChild(dltBtnRefElement);
+    
     // editBtnRefElement.style.margin = "0px 10px 0px 10px";
     editBtnRefElement.addEventListener("click", function(){ editText(textLabel); });
+    // editText.style.cursor = "auto";
     doneBtnElement.addEventListener("click", function(){doneText(textLabel)});
     //remove method allows you to remove the element//
-    dltBtnRefElement.addEventListener("click", function(){listItemElement.remove(textLabel);});
+    dltBtnRefElement.addEventListener("click", function(){dltText(listItemElement)});
     //prepend method puts element at first index and append puts element at last index//
     (document.getElementById("task")).prepend(listItemElement);
 }
@@ -38,15 +43,27 @@ submitBtnRef.onclick = buttonClick;
 //handling edit button for task
 function editText(textLabel) {
     textLabel.contentEditable = true;
+    textLabel.style.cursor="auto";
+    textLabel.style.color = "#00FFFF";
+    textLabel.style.textOverflow ="clip";
 }
 function doneText(textLabel){
+//  textLabel = document.getElementById('selectable');
+// const selection = window.getSelection();
+// const range = document.createRange();
+// selection.removeAllRanges();
+
     textLabel.contentEditable = false;
+    textLabel.style.color = "white";
+    // textLabel.focus();
+    // textLabel.setSelectionRange(start,start);
+    // textLabel.style.textOverflow ="ellipsis";
 }
 
-//handling delete button for task
-// function dltText(textLabel){
-//     textLabel.removeChild(dltBtnRefElement);
-// }
+// handling delete button for task
+function dltText(listItemElement){
+    listItemElement.remove();
+}
 
 //without append and prepend(bhanu's help)
 // let oldData = document.getElementById("task").innerHTML;
