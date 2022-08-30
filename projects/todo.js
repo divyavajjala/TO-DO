@@ -1,67 +1,78 @@
-function buttonClick() { 
-    let listItemElement = document.createElement("li");
-    let todoItemText = document.getElementById("text").value;
-    //to clear the input text once user submit the button//
-    document.getElementById("text").value="";
+function submitButtonClick() { 
     //creating elements//
+    let listItemElement = document.createElement("li");
+    createCheckboxAndAppendToListItem(listItemElement);
     let textLabel = document.createElement("label");
-    textLabel.classList.add("taskLabel");
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    //append child method allows you to add node to the end of the list of child nodes of a specified parent node//
-    listItemElement.appendChild(checkbox);
-    // checkbox.style.margin= "5px";
-    
+    let todoItemText = document.getElementById("text").value;
     textLabel.innerHTML = todoItemText;
-    listItemElement.appendChild(textLabel);
-    
+    textLabel.classList.add("taskLabel");
     let editBtnRefElement = document.createElement("button");
     editBtnRefElement.innerHTML = "edit";
-    listItemElement.appendChild(editBtnRefElement);
-    // editBtnRefElement.style.float = "right";
-    let doneBtnElement = document.createElement("button");
-    doneBtnElement.innerHTML = "Done";
-    listItemElement.appendChild(doneBtnElement);
-    
-    // editBtnRefElement.style.float = "right";
-    // doneBtnElement.style.float = "right";
+    editBtnRefElement.classList.add("editBtn");
+    let doneBtnRefElement = document.createElement("button");
+    doneBtnRefElement.innerHTML = "Done";
+    doneBtnRefElement.style.display="none";
+    doneBtnRefElement.classList.add("doneBtn");
     let dltBtnRefElement = document.createElement("button");
     dltBtnRefElement.innerHTML = "delete";
+    dltBtnRefElement.classList.add("dltBtn");
+    //append child method allows you to add node to the end of the list of child nodes of a specified parent node//
+    listItemElement.appendChild(textLabel);
+    listItemElement.appendChild(editBtnRefElement);
+    listItemElement.appendChild(doneBtnRefElement);
     listItemElement.appendChild(dltBtnRefElement);
-    
-    // editBtnRefElement.style.margin = "0px 10px 0px 10px";
-    editBtnRefElement.addEventListener("click", function(){ editText(textLabel); });
-    // editText.style.cursor = "auto";
-    doneBtnElement.addEventListener("click", function(){doneText(textLabel)});
-    //remove method allows you to remove the element//
-    dltBtnRefElement.addEventListener("click", function(){dltText(listItemElement)});
+    addActionListeners(listItemElement, textLabel, editBtnRefElement, doneBtnRefElement, dltBtnRefElement);
     //prepend method puts element at first index and append puts element at last index//
     (document.getElementById("task")).prepend(listItemElement);
+     //to clear the input text once user submit the button//
+     document.getElementById("text").value="";
 }
-var submitBtnRef = document.getElementById("btn");
-submitBtnRef.onclick = buttonClick;
-//handling edit button for task
-function editText(textLabel) {
-    textLabel.contentEditable = true;
-    textLabel.style.cursor="auto";
-    textLabel.style.color = "#00FFFF";
-    textLabel.style.textOverflow ="clip";
+//create checkbox element and appends to newly created listitem element
+function createCheckboxAndAppendToListItem(newlyCreatedListItemElement) {
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.classList.add("checkbox")
+    newlyCreatedListItemElement.appendChild(checkbox);
 }
-function doneText(textLabel){
-//  textLabel = document.getElementById('selectable');
-// const selection = window.getSelection();
-// const range = document.createRange();
-// selection.removeAllRanges();
 
-    textLabel.contentEditable = false;
-    textLabel.style.color = "white";
-    // textLabel.focus();
-    // textLabel.setSelectionRange(start,start);
-    // textLabel.style.textOverflow ="ellipsis";
+var submitBtnRef = document.getElementById("btn");
+submitBtnRef.onclick = submitButtonClick;
+
+//handling edit button for task
+
+function editText(textLabel,editBtnRefElement,doneBtnRefElement) {
+    textLabel.contentEditable = true;
+    editBtnRefElement.style.display = "none";
+    doneBtnRefElement.style.display = "inline-block";
+    // textLabel.style:hover = ;
+    textLabel.style.cursor = "auto";
+    textLabel.style.color = "#00FFFF";
+    textLabel.style.textOverflow = "clip";
+}
+
+//handling done button for task
+
+function doneText(listItemElement, oldTextLabel, editBtnRefElement, dltBtnRefElement, doneBtnRefElement) {
+    let newTextLabel = document.createElement("label");
+    newTextLabel.classList.add("taskLabel");
+    newTextLabel.innerHTML = oldTextLabel.innerHTML;
+    oldTextLabel.replaceWith(newTextLabel);
+    doneBtnRefElement.style.display = "none";
+    editBtnRefElement.style.display = "inline-block";
+    addActionListeners(listItemElement, newTextLabel, editBtnRefElement, doneBtnRefElement, dltBtnRefElement);
+    // textLabel.contentEditable = false;
+}
+
+function addActionListeners(listItemElement, newTextLabel, editBtnRefElement, doneBtnRefElement, dltBtnRefElement) {
+    editBtnRefElement.addEventListener("click", function(){ editText(newTextLabel,editBtnRefElement,doneBtnRefElement); });
+    doneBtnRefElement.addEventListener("click", function(){doneText(listItemElement, newTextLabel, editBtnRefElement, dltBtnRefElement, doneBtnRefElement)});
+    dltBtnRefElement.addEventListener("click", function(){dltText(listItemElement)});
 }
 
 // handling delete button for task
-function dltText(listItemElement){
+// remove method allows you to remove the element
+
+function dltText(listItemElement) {
     listItemElement.remove();
 }
 
@@ -69,10 +80,31 @@ function dltText(listItemElement){
 // let oldData = document.getElementById("task").innerHTML;
     // oldData = oldData.replace(/<br>/g,"\n");
     // console.log(oldData);
-    
     // document.getElementById("task").innerText = todoItemText;
     // let combinedList = todoItemText + "\n"+ oldData;
     // if(oldData===""){
     //    combinedList = todoItemText;
     // }
     // document.getElementById("task").innerHTML = listItemElement;
+    
+
+    //apply discount based on the shopping cart total
+    //if the shopping cart total 
+
+//     var passengers = [ { name: "Jane Doloop", paid: true },
+//  { name: "Dr. Evel", paid: true },
+//  { name: "Sue Property", paid: false },
+//  { name: "John Funcall", paid: true } ];
+//   //write a function to check if every passenger in the passenger's list paid the price
+//   //abhilash asked me to check if evryone paid or not?
+//   //then my brain took the list and saw the paid column
+//   //go one by one 
+
+//   function checkPaidList (passengers) {
+//     for(var i=0; i<passengers.length; i++){
+//         if(!passengers[i].paid===true){
+//             return false;
+//         }
+//     }
+//     return true;
+//   }
