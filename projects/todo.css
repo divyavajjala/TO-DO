@@ -1,6 +1,7 @@
 body{
     width: 90%;
     background-color: #616091;
+    
 }
 h1{
     color: #fb99ad;
@@ -26,21 +27,26 @@ input, button{
     border-radius: 5px;
     border: 1px solid #808080;
     font-size: 25px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 button {
     background: linear-gradient(to right, rgb(47, 106, 185),skyblue);
+    padding: 2px;
+    
 }
 
 /* h2 {
     padding: 0px 0px 0px 30%;
 } */
 #task {
+    /* display: flex; */
     text-align: center;
-    height: auto;
+    height: 400px;
     border: 1px solid black;
     /* width:50%; */
     margin:auto;
+    overflow:auto;
+    
 }
 li {
     border: 1px solid black;
@@ -49,5 +55,30 @@ li {
     margin: 10px 10px 0px 10px;
     list-style-type: none;
 }
-
-    
+.taskLabel {
+    display: inline-block;
+    width: 30%;
+    /* height: auto; */
+    /* display: table-row; */
+    /* float:left; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    margin: 5px;
+   
+}
+.editBtn, .dltBtn, .doneBtn, .checkbox {
+    display:inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 8%;
+    height: 8%;
+}  
+.checkbox {
+    height: 30px;
+    width:20px;
+    float:left;
+    vertical-align: center;
+}
