@@ -7,34 +7,41 @@ function submitButtonClick() {
     textLabel.innerHTML = todoItemText;
     textLabel.classList.add("taskLabel");
     let editBtnRefElement = document.createElement("button");
-    editBtnRefElement.innerHTML = "edit";
+    editBtnRefElement.innerHTML = '<i class="fas fa-edit"></i>';
     editBtnRefElement.classList.add("editBtn");
     let doneBtnRefElement = document.createElement("button");
-    doneBtnRefElement.innerHTML = "Done";
+    doneBtnRefElement.innerHTML = '<i class="fas fa-save"></i>';
     doneBtnRefElement.style.display="none";
     doneBtnRefElement.classList.add("doneBtn");
     let dltBtnRefElement = document.createElement("button");
-    dltBtnRefElement.innerHTML = "delete";
+    dltBtnRefElement.innerHTML = '<i class="fas fa-trash"></i>';
     dltBtnRefElement.classList.add("dltBtn");
+    
     //append child method allows you to add node to the end of the list of child nodes of a specified parent node//
+
     listItemElement.appendChild(textLabel);
     listItemElement.appendChild(editBtnRefElement);
     listItemElement.appendChild(doneBtnRefElement);
     listItemElement.appendChild(dltBtnRefElement);
     addActionListeners(listItemElement, textLabel, editBtnRefElement, doneBtnRefElement, dltBtnRefElement);
+
     //prepend method puts element at first index and append puts element at last index//
+
     (document.getElementById("task")).prepend(listItemElement);
+
      //to clear the input text once user submit the button//
+
      document.getElementById("text").value="";
 }
 //create checkbox element and appends to newly created listitem element
+
 function createCheckboxAndAppendToListItem(newlyCreatedListItemElement) {
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox")
     newlyCreatedListItemElement.appendChild(checkbox);
 }
-
+//submit button click event//
 var submitBtnRef = document.getElementById("btn");
 submitBtnRef.onclick = submitButtonClick;
 
@@ -45,8 +52,8 @@ function editText(textLabel,editBtnRefElement,doneBtnRefElement) {
     editBtnRefElement.style.display = "none";
     doneBtnRefElement.style.display = "inline-block";
     // textLabel.style:hover = ;
-    textLabel.style.cursor = "auto";
-    textLabel.style.color = "#00FFFF";
+    textLabel.style.border = "1px solid black";
+    textLabel.style.color = "#7e05f5";
     textLabel.style.textOverflow = "clip";
 }
 
@@ -86,25 +93,3 @@ function dltText(listItemElement) {
     //    combinedList = todoItemText;
     // }
     // document.getElementById("task").innerHTML = listItemElement;
-    
-
-    //apply discount based on the shopping cart total
-    //if the shopping cart total 
-
-//     var passengers = [ { name: "Jane Doloop", paid: true },
-//  { name: "Dr. Evel", paid: true },
-//  { name: "Sue Property", paid: false },
-//  { name: "John Funcall", paid: true } ];
-//   //write a function to check if every passenger in the passenger's list paid the price
-//   //abhilash asked me to check if evryone paid or not?
-//   //then my brain took the list and saw the paid column
-//   //go one by one 
-
-//   function checkPaidList (passengers) {
-//     for(var i=0; i<passengers.length; i++){
-//         if(!passengers[i].paid===true){
-//             return false;
-//         }
-//     }
-//     return true;
-//   }
